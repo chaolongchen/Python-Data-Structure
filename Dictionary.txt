@@ -1,0 +1,482 @@
+Dictionary. Consider a language. Each word maps to a meaning. A book is a written work. A cloud is floating water. In a dictionary we map keys (words) to values (meanings).
+Python dictionaries are maps. With square brackets, we assign and access a value at a key. With get() we can specify a default result.
+Get example. There are many ways to get values. We can use the "[" and "]" characters. We access a value directly this way. But this syntax causes a KeyError if the key is not found.
+Instead:
+We can use the get() method with 1 or 2 arguments. This does not cause any errors—it returns None.
+Argument 1:
+The first argument to get() is the key you are testing. This argument is required.
+Argument 2:
+The second, optional argument to get() is the default value. This is returned if the key is not found.
+
+Based on: Python 3
+
+Python program that gets values
+
+plants = {}
+
+# Add three key-value tuples to the dictionary.
+plants["radish"] = 2
+plants["squash"] = 4
+plants["carrot"] = 7
+
+# Get syntax 1.
+print(plants["radish"])
+
+# Get syntax 2.
+print(plants.get("tuna"))
+print(plants.get("tuna", "no tuna found"))
+
+Output
+
+2
+None
+no tuna found
+
+Get, none. In Python "None" is a special value like null or nil. We often use None in programs. It means no value. Get() returns None if no value is found in a dictionary.
+None
+Note:
+It is valid to assign a key to None. So get() can return None, but there is actually a None value in the dictionary.
+
+KeyError. Errors in programs are not there just to annoy you. They indicate problems with a program and help it work better. A KeyError occurs on an invalid access.
+KeyError
+Python program that causes KeyError
+
+lookup = {"cat": 1, "dog": 2}
+
+# The dictionary has no fish key!
+print(lookup["fish"])
+
+Output
+
+Traceback (most recent call last):
+  File "C:\programs\file.py", line 5, in <module>
+    print(lookup["fish"])
+KeyError: 'fish'
+
+In-keyword. A dictionary may (or may not) contain a specific key. Often we need to test for existence. One way to do so is with the in-keyword.
+In
+True:
+This keyword returns 1 (meaning true) if the key exists as part of a key-value tuple in the dictionary.
+False:
+If the key does not exist, the in-keyword returns 0, indicating false. This is helpful in if-statements.
+Python program that uses in
+
+animals = {}
+animals["monkey"] = 1
+animals["tuna"] = 2
+animals["giraffe"] = 4
+
+# Use in.
+if "tuna" in animals:
+    print("Has tuna")
+else:
+    print("No tuna")
+
+# Use in on nonexistent key.
+if "elephant" in animals:
+    print("Has elephant")
+else:
+    print("No elephant")
+
+Output
+
+Has tuna
+No elephant
+
+Len built-in. This returns the number of key-value tuples in a dictionary. The data types of the keys and values do not matter. Len also works on lists and strings.
+Caution:
+The length returned for a dictionary does not separately consider keys and values. Each pair adds one to the length.
+Python program that uses len on dictionary
+
+animals = {"parrot": 2, "fish": 6}
+
+# Use len built-in on animals.
+print("Length:", len(animals))
+
+Output
+
+Length: 2
+
+Len notes. Let us review. Len() can be used on other data types, not just dictionaries. It acts upon a list, returning the number of elements within. It also handles tuples.
+Len
+
+Keys, values. A dictionary contains keys. It contains values. And with the keys() and values() methods, we can store these elements in lists.
+Next:
+A dictionary of three key-value pairs is created. This dictionary could be used to store hit counts on a website's pages.
+Views:
+We introduce two variables, named keys and values. These are not lists—but we can convert them to lists.
+Convert
+Python program that uses keys
+
+hits = {"home": 125, "sitemap": 27, "about": 43}
+keys = hits.keys()
+values = hits.values()
+
+print("Keys:")
+print(keys)
+print(len(keys))
+
+print("Values:")
+print(values)
+print(len(values))
+
+Output
+
+Keys:
+dict_keys(['home', 'about', 'sitemap'])
+3
+Values:
+dict_values([125, 43, 27])
+3
+
+Keys, values ordering. Elements returned by keys() and values() are not ordered. In the above output, the keys-view is not alphabetically sorted. Consider a sorted view (keep reading).
+Sorted keys. In a dictionary keys are not sorted in any way. They are unordered. Their order reflects the internals of the hashing algorithm's buckets.
+But:
+Sometimes we need to sort keys. We invoke another method, sorted(), on the keys. This creates a sorted view.
+Python program that sorts keys in dictionary
+
+# Same as previous program.
+hits = {"home": 124, "sitemap": 26, "about": 32}
+
+# Sort the keys from the dictionary.
+keys = sorted(hits.keys())
+
+print(keys)
+
+Output
+
+['about', 'home', 'sitemap']
+
+Items. With this method we receive a list of two-element tuples. Each tuple contains, as its first element, the key. Its second element is the value.
+Tip:
+With tuples, we can address the first element with an index of 0. The second element has an index of 1.
+Program:
+The code uses a for-loop on the items() list. It uses the print() method with two arguments.
+Python that uses items method
+
+rents = {"apartment": 1000, "house": 1300}
+
+# Convert to list of tuples.
+rentItems = rents.items()
+
+# Loop and display tuple items.
+for rentItem in rentItems:
+    print("Place:", rentItem[0])
+    print("Cost:", rentItem[1])
+    print("")
+
+Output
+
+Place: house
+Cost: 1300
+
+Place: apartment
+Cost: 1000
+
+Items, assign. We cannot assign elements in the tuples. If you try to assign rentItem[0] or rentItem[1], you will get an error. This is the error message.
+Python error:
+
+TypeError: 'tuple' object does not support item assignment
+
+Items, unpack. The items() list can be used in another for-loop syntax. We can unpack the two parts of each tuple in items() directly in the for-loop.
+Here:
+In this example, we use the identifier "k" for the key, and "v" for the value.
+Python that unpacks items
+
+# Create a dictionary.
+data = {"a": 1, "b": 2, "c": 3}
+
+# Loop over items and unpack each item.
+for k, v in data.items():
+    # Display key and value.
+    print(k, v)
+
+Output
+
+a 1
+c 3
+b 2
+
+For-loop. A dictionary can be directly enumerated with a for-loop. This accesses only the keys in the dictionary. To get a value, we will need to look up the value.
+Items:
+We can call the items() method to get a list of tuples. No extra hash lookups will be needed to access values.
+Here:
+The plant variable, in the for-loop, is the key. The value is not available—we would need plants.get(plant) to access it.
+Python that loops over dictionary
+
+plants = {"radish": 2, "squash": 4, "carrot": 7}
+
+# Loop over dictionary directly.
+# ... This only accesses keys.
+for plant in plants:
+    print(plant)
+
+Output
+
+radish
+carrot
+squash
+
+Del built-in. How can we remove data? We apply the del method to a dictionary entry. In this program, we initialize a dictionary with 3 key-value tuples.
+Del
+Then:
+We remove the tuple with key "windows". When we display the dictionary, it now contains only two key-value pairs.
+Python that uses del
+
+systems = {"mac": 1, "windows": 5, "linux": 1}
+
+# Remove key-value at "windows" key.
+del systems["windows"]
+
+# Display dictionary.
+print(systems)
+
+Output
+
+{'mac': 1, 'linux': 1}
+
+Del, alternative. An alternative to using del on a dictionary is to change the key's value to a special value. This is a null object refactoring strategy.
+Update. With this method we change one dictionary to have new values from a second dictionary. Update() also modifies existing values. Here we create two dictionaries.
+Pets1, pets2:
+The pets2 dictionary has a different value for the dog key—it has the value "animal", not "canine".
+Also:
+The pets2 dictionary contains a new key-value pair. In this pair the key is "parakeet" and the value is "bird".
+Result:
+Existing values are replaced with new values that match. New values are added if no matches exist.
+Python that uses update
+
+# First dictionary.
+pets1 = {"cat": "feline", "dog": "canine"}
+
+# Second dictionary.
+pets2 = {"dog": "animal", "parakeet": "bird"}
+
+# Update first dictionary with second.
+pets1.update(pets2)
+
+# Display both dictionaries.
+print(pets1)
+print(pets2)
+
+Output
+
+{'parakeet': 'bird', 'dog': 'animal', 'cat': 'feline'}
+{'dog': 'animal', 'parakeet': 'bird'}
+
+Copy. This method performs a shallow copy of an entire dictionary. Every key-value tuple in the dictionary is copied. This is not just a new variable reference.
+Here:
+We create a copy of the original dictionary. We then modify values within the copy. The original is not affected.
+Python that uses copy
+
+original = {"box": 1, "cat": 2, "apple": 5}
+
+# Create copy of dictionary.
+modified = original.copy()
+
+# Change copy only.
+modified["cat"] = 200
+modified["apple"] = 9
+
+# Original is still the same.
+print(original)
+print(modified)
+
+Output
+
+{'box': 1, 'apple': 5, 'cat': 2}
+{'box': 1, 'apple': 9, 'cat': 200}
+
+Fromkeys. This method receives a sequence of keys, such as a list. It creates a dictionary with each of those keys. We can specify a value as the second argument.
+Values:
+If you specify the second argument to fromdict(), each key has that value in the newly-created dictionary.
+Python that uses fromkeys
+
+# A list of keys.
+keys = ["bird", "plant", "fish"]
+
+# Create dictionary from keys.
+d = dict.fromkeys(keys, 5)
+
+# Display.
+print(d)
+
+Output
+
+{'plant': 5, 'bird': 5, 'fish': 5}
+
+Dict. With this built-in function, we can construct a dictionary from a list of tuples. The tuples are pairs. They each have two elements, a key and a value.
+dict
+Tip:
+This is a possible way to load a dictionary from disk. We can store (serialize) it as a list of pairs.
+Python that uses dict built-in
+
+# Create list of tuple pairs.
+# ... These are key-value pairs.
+pairs = [("cat", "meow"), ("dog", "bark"), ("bird", "chirp")]
+
+# Convert list to dictionary.
+lookup = dict(pairs)
+
+# Test the dictionary.
+print(lookup.get("dog"))
+print(len(lookup))
+
+Output
+
+bark
+3
+
+Get performance. I compared a loop that uses get() with one that uses both the in-keyword and a second look up. Version 2, with the "in" operator, was faster.
+Version 1:
+This version uses a second argument to get(). It tests that against the result and then proceeds if the value was found.
+Version 2:
+This version uses "in" and then a lookup. Twice as many lookups occur. But fewer statements are executed.
+Python that benchmarks get
+
+import time
+
+# Input dictionary.
+systems = {"mac": 1, "windows": 5, "linux": 1}
+
+print(time.time())
+
+# Version 1: use get.
+v = 0
+x = 0
+for i in range(10000000):
+    x = systems.get("windows", -1)
+    if x != -1:
+        v = x
+
+print(time.time())
+
+# Version 2: use in.
+v = 0
+for i in range(10000000):
+    if "windows" in systems:
+        v = systems["windows"]
+
+print(time.time())
+
+Results
+
+1478552825.0586164
+1478552827.0295532 (get = 1.97 s)
+1478552828.1397061 (in  = 1.11 s)
+
+Performance, loop. A dictionary can be looped over in different ways. In this benchmark we test two approaches. We access the key and value in each iteration.
+Version 1:
+This version loops over the keys of the dictionary with a while-loop. It then does an extra lookup to get the value.
+Version 2:
+This version instead uses a list of tuples containing the keys and values. It actually does not touch the original dictionary.
+But:
+Version 2 has the same effect—we access the keys and values. The cost of calling items() initially is not counted here.
+Result:
+Looping over a list of tuples is faster than looping over a dictionary. This makes sense—with the list, no lookups are done.
+Python that benchmarks loops
+
+import time
+
+data = {"parrot": 1, "frog": 1, "elephant": 2, "snake": 5}
+items = data.items()
+
+print(time.time())
+
+# Version 1: get.
+for i in range(10000000):
+    v = 0
+    for key in data:
+        v = data[key]
+
+print(time.time())
+
+# Version 2: items.
+for i in range(10000000):
+    v = 0
+    for tuple in items:
+        v = tuple[1]
+
+print(time.time())
+
+Results
+
+1478467043.8872652
+1478467048.6821966 (version 1 = 4.79 s)
+1478467053.2630682 (version 2 = 4.58 s)
+
+Frequencies. A dictionary can be used to count frequencies. Here we introduce a string that has some repeated letters. We use get() on a dictionary to start at 0 for nonexistent values.
+So:
+The first time a letter is found, its frequency is set to 0 + 1, then 1 + 1. Get() has a default return.
+Python that counts letter frequencies
+
+# The first three letters are repeated.
+letters = "abcabcdefghi"
+
+frequencies = {}
+for c in letters:
+    # If no key exists, get returns the value 0.
+    # ... We then add one to increase the frequency.
+    # ... So we start at 1 and progress to 2 and then 3.
+    frequencies[c] = frequencies.get(c, 0) + 1
+
+for f in frequencies.items():
+    # Print the tuple pair.
+    print(f)
+
+Output
+
+('a', 2)
+('c', 2)
+('b', 2)
+('e', 1)
+('d', 1)
+('g', 1)
+('f', 1)
+('i', 1)
+('h', 1)
+
+Invert keys, values. Sometimes we want to invert a dictionary—change the values to keys, and the keys to values. Complex solutions are possible. But we can do this with a simple loop.
+Python that inverts a dictionary
+
+reptiles = {"frog": 20, "snake": 8}
+inverted = {}
+
+# Use items loop.
+# ... Turn each value into a key.
+for key, value in reptiles.items():
+    inverted[value] = key
+    
+print(":::ORIGINAL:::")
+print(reptiles)
+print(":::KEYS, VALUES SWAPPED:::")
+print(inverted)
+
+Output
+
+:::ORIGINAL:::
+{'frog': 20, 'snake': 8}
+:::KEYS, VALUES SWAPPED:::
+{8: 'snake', 20: 'frog'}
+
+Memoize. One classic optimization is called memoization. And this can be implemented easily with a dictionary. In memoization, a function (def) computes its result.
+Memoize
+Memoize: Lower Dictionary
+And:
+Once the computation is done, it stores its result in a cache. In the cache, the argument is the key. And the result is the value.
+
+Memoization, continued. When a memoized function is called, it first checks this cache to see if it has been, with this argument, run before.
+And:
+If it has, it returns its cached—memoized—return value. No further computations need be done.
+Note:
+If a function is only called once with the argument, memoization has no benefit. And with many arguments, it usually works poorly.
+
+Add order performance. When hashes collide, a linear search must be done to locate a key in the dictionary. If we add a key earlier, it is faster to locate.
+Dictionary Order
+
+String key performance. In another test, I compared string keys. I found that long string keys take longer to look up than short ones. Shorter keys are faster.
+Dictionary String Key
+
+Counter. For frequencies, we can use a special Counter from the collections module. This can make counters easier to add in programs.
+Counter
+
+A summary. A dictionary is usually implemented as a hash table. Here a special hashing algorithm translates a key (often a string) into an integer.

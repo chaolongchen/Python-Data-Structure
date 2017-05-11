@@ -1,0 +1,463 @@
+List. As a tree grows, layers of wood are added. Seasons and temperatures affect its growth. The rings could be represented as a list.
+A Python list. Elements can be added, looped over or sorted. Lists can be combined with other structures. Much like a tree, we add elements (layers) to grow the list.
+An example. A list manages its capacity. We start with an empty list. But it expands to fit the numbers as we add them. The 4 elements we add to the list are stored in that order.
+Tip:
+The order is guaranteed in a list, unlike in a dictionary. A list is an ordered collection.
+Append:
+This method is called upon the list instance (which must not equal None). It receives the value we are adding.
+Based on: Python 3
+
+Python program that uses append
+
+list = []
+list.append(1)
+list.append(2)
+list.append(6)
+list.append(3)
+
+print(list)
+
+Output
+
+[1, 2, 6, 3]
+
+
+Insert. An element can be added anywhere in a list. With insert() we can add to the first part or somewhere in the middle of the list.
+Important:
+The index 1 indicates the second element location. Lists are indexed starting at zero—they are zero-based.
+Python program that calls insert
+
+list = ["dot", "perls"]
+
+# Insert at index 1.
+list.insert(1, "net")
+
+print(list)
+
+Output
+
+['dot', 'net', 'perls']
+
+Extend. A list can be appended to another list with extend(). So we extend one list to include another list at its end. We concatenate (combine) lists.
+Caution:
+If we try to call append() to add a list, the entire new list will be added as a single element of the result list.
+Tip:
+Another option is to use a for-loop, or use the range syntax to concatenate (extend) the list.
+Python program that uses extend
+
+# Two lists.
+a = [1, 2, 3]
+b = [4, 5, 6]
+
+# Add all elements in list "b" to list "a."
+a.extend(b)
+
+# List "a" now contains six elements.
+print(a)
+
+Output
+
+[1, 2, 3, 4, 5, 6]
+
+Len. A list contains a certain number of elements. This may be zero if it is empty. With len, a built-in method, we access the element count.
+Python program that uses len
+
+animals = []
+animals.append("cat")
+animals.append("dog")
+count = len(animals)
+
+# Display the list and the length.
+print(animals)
+print(count)
+
+Output
+
+['cat', 'dog']
+2
+
+In keyword. Is an element in a list? We use "in" and "not in" to determine this. Other approaches are possible but "in" is simplest. Here we search a list with "in" and "not in."
+Python program that uses in
+
+items = ["book", "computer", "keys", "mug"]
+
+if "computer" in items:
+    print(1)
+
+if "atlas" in items:
+    # This is not reached.
+    print(2)
+else:
+    print(3)
+
+if "marker" not in items:
+    print(4)
+
+Output
+
+1
+3
+4
+
+Sort, reverse. Lists maintain the order of their elements. And they can be reordered. With the sort method, we change the order of elements from low to high.
+And:
+With reverse, we invert the current order of the elements. Sort and reverse can be combined (for a reversed sort).
+Python program that sorts and reverses
+
+list = [400, 500, 100, 2000]
+
+# Reversed.
+list.reverse()
+print(list)
+
+# Sorted.
+list.sort()
+print(list)
+
+# Sorted and reversed.
+list.reverse()
+print(list)
+
+Output
+
+[2000, 100, 500, 400]
+[100, 400, 500, 2000]
+[2000, 500, 400, 100]
+
+Sort, key. Sometimes elements in a list must be sorted in a specific way. Here, we sort list string elements based on their last characters, and then their second characters.
+Def:
+The example first uses a def method as the key argument to sort. The "key equals" part must be specified.
+Lambda:
+We introduce an alternate syntax form, the lambda expression, for sorting elements in a last. This targets the second char.
+Lambdas
+Python that sorts with def, lambda
+
+def lastchar(s):
+    # Return last character in string.
+    return s[-1]
+
+# Input.
+values = ["abc", "bca", "cab"]
+
+# Sort by last character in the strings.
+values.sort(key=lastchar)
+print(values)
+
+# Sort by the second character in the strings.
+# ... Use a lambda expression.
+values.sort(key=lambda s: s[1])
+print(values)
+
+Output
+
+['bca', 'cab', 'abc']
+['cab', 'abc', 'bca']
+
+Remove, del. Remove acts upon a value. It first searches for that value, and then removes it. Elements (at an index) can also be removed with the del statement.
+Remove:
+This takes away the first matching element in the list. We can call it multiple times, and it could keep changing the list.
+Del:
+This meanwhile removes elements by index, or a range of indices. Del uses the slice syntax.
+Del
+Python that removes elements
+
+names = ["Tommy", "Bill", "Janet", "Bill", "Stacy"]
+
+# Remove this value.
+names.remove("Bill")
+print(names)
+
+# Delete all except first two elements.
+del names[2:]
+print(names)
+
+# Delete all except last element.
+del names[:1]
+print(names)
+
+Output
+
+['Tommy', 'Janet', 'Bill', 'Stacy']
+['Tommy', 'Janet']
+['Janet']
+
+Count. This method does not return the number of elements in the list. Instead it counts a specific element. As an argument, pass the value of the element we wish to count.
+Note:
+Internally count() loops through all the elements and keeps track of the count. It then returns this value.
+Python that uses count
+
+names = ['a', 'a', 'b', 'c', 'a']
+
+# Count the letter a.
+value = names.count('a')
+print(value)
+
+Output
+
+3
+
+Index. This searches lists. We pass it an argument that matches a value in the list. It returns the index where that value is found. If no value is found, it throws an error.
+Tip:
+For programs where you need more control, please consider using a for-loop instead of index().
+Info:
+With a for-loop, we can more elegantly handle cases where the value is not found. This avoids the ValueError.
+Python that uses index
+
+# Input list.
+values = ["uno", "dos", "tres", "cuatro"]
+
+# Locate string.
+n = values.index("dos")
+print(n, values[n])
+
+# Locate another string.
+n = values.index("tres")
+print(n, values[n])
+
+# Handle nonexistent string.
+try:
+    n = values.index("?")
+    # Not reached.
+    print(n)
+except:
+    # Value not found.
+    print("Not found")
+
+Output
+
+1 dos
+2 tres
+Not found
+
+For-loop. In list loops, we often need no index. We require just the elements in order. The for-loop is ideal in this situation. It eliminates the confusion of an index variable.
+Here:
+We encounter each of the four list elements in the for-loop. We use the identifier "element" in the loop body.
+Python that uses for, list
+
+# An input list.
+elements = ["spider", "moth", "butterfly", "lizard"]
+
+# Use simple for-loop.
+for element in elements:
+    print(element)
+
+Output
+
+spider
+moth
+butterfly
+lizard
+
+Adjacent elements. Often we need only one element as we loop. But in some cases, we need adjacent elements to compare. Here we access adjacent elements in the list.
+Tip:
+Starting at index 1 is key. In the loop body, we access the previous element, at index "i - 1", and the current element.
+Python that gets adjacent list elements
+
+# Input list.
+elements = [0, 10, 20, 30]
+
+# Use range.
+for i in range(1, len(elements)):
+    # Get two adjacent elements.
+    a = elements[i - 1]
+    b = elements[i]
+
+    # Print two elements.
+    print(a, b)
+
+Output
+
+0 10
+10 20
+20 30
+
+List comprehension expresses an entire loop in a single statement. In this example we use list comprehension to translate a list into a list of HTML strings.
+List Comprehension
+Here:
+We apply the html method on each string in the input list. This calls capitalize() and returns an HTML fragment.
+Identifier:
+In this list comprehension, each string is given the identifier "x." Html() is called on each element in the list.
+Python that uses list comprehension
+
+# Transform string into HTML.
+def html(s):
+    return "<b>" + s.capitalize() + "</b>"
+
+# Input string.
+input = ["rabbit", "mouse", "gorilla", "giraffe"]
+
+# List comprehension.
+list = [html(x) for x in input]
+
+# Result list.
+print(list)
+
+Output
+
+['<b>Rabbit</b>', '<b>Mouse</b>', '<b>Gorilla</b>', '<b>Giraffe</b>']
+
+List comprehension, notes. In list comprehension, we apply a method or other operation to each element in a collection. This is immensely powerful.
+And:
+The syntax is short, making it easier to read and scan for programmers. We avoid tedious for-loops.
+
+File lines. Here we read a file's lines into a list. Often each line needs to be stripped of trailing whitespace and newlines. We use a loop to strip each line and append it to a list.
+Strip
+Input file
+
+Line 1.
+Line 2.
+
+Python program that uses readlines, list
+
+list = []
+f = open("C:\\programs\\file.txt", "r")
+
+# Loop through all lines.
+for line in f.readlines():
+    # Strip each line to remove trailing newline.
+    list.append(line.strip())
+
+print(list)
+
+Output
+
+['Line 1.', 'Line 2.']
+
+Copy. A list is copied using the slice syntax. When we specify no numbers in the slice, it covers the entire list. So by assigning to an unspecified slice, we copy the list.
+Copy List
+Resize:
+We can also resize a list. The slice syntax, and methods like append() are useful here.
+Resize List
+Example copy statement: Python
+
+# Copy list1 into list2.
+list2 = list1[:]
+
+Duplicates. Sometimes we want to remove duplicate elements from a list. If ordering is important, we may need a special method to avoid reordering elements. Here a set is useful.
+Remove Duplicates
+
+Two-dimensional. A list can contain other lists. We can use this sort of data structure as a two-dimensional grid of elements. These are jagged. Sub-lists can vary in length.
+2D List
+Tip:
+Lists of lists can be useful for small graphs and other applications that need a coordinate lookup, but not a huge memory space.
+Warning:
+A 2D list is not efficient for larger areas. An array would be faster and use far less memory.
+
+Format. Suppose we have a list. We want to insert some elements from it into a string. We can use str.format for this. Format() has special support for list arguments.
+Tip:
+The second argument of format() assigns an identifier to a list variable, and we can access elements within the string.
+Python that uses format, list
+
+list = [10, 20, 30]
+
+# Use "v" identifier to refer to the list.
+# ... Access its elements in format.
+res = str.format("The values are {v[0]}, {v[1]} and {v[2]}", v=list)
+print(res)
+
+Output
+
+The values are 10, 20 and 30
+
+All built-in. With all, we check to see if all elements evaluate to True. If even a single element is false, all() returns False. The method uses standard boolean evaluation for elements.
+Python that uses all
+
+items = [False, None, True]
+
+# Some elements evaluate to False, so all is False.
+if not all(items):
+    print(False)
+
+items = [10, 20, 30]
+
+# All the items evaluate to True.
+if all(items):
+    print(True)
+
+Output
+
+False
+True
+
+Any built-in. This loops over its iterable argument (like a list). If "any" of the elements in the argument evaluate to True, any() too returns True. So it scans for a True result.
+any
+False:
+Any() returns False if no elements are True. So "not any" is the same as "no True values."
+Python that uses any
+
+elements = [False, None, "Pomegranate", 0]
+
+# One value is True, so any returns True.
+if any(elements):
+    print(True)
+
+elements = [0, 0, False]
+
+# Now no elements are True.
+# ... Any returns False.
+if not any(elements):
+    print(False)
+
+Output
+
+True
+False
+
+Filter. This removes non-matching elements. Internally it loops over the list (or other iterable). When the lambda predicate returns False, the element is removed.
+Result:
+The filter() built-in does not return another list. It returns an iterator. We can use the list() function to create a new list.
+Python that uses filter
+
+numbers = [10, 20, 0, 0, 30, 40, -10]
+
+# Filter out numbers equal to or less than zero.
+result = list(filter(lambda n: n > 0, numbers))
+print(result)
+
+Output
+
+[10, 20, 30, 40]
+
+Performance. What is the fastest way to search a list? We test index() versus a for-loop with a range. There is a difference here. Index() raises an exception if no match is found.
+Here:
+In this test, the index method is far faster than the for-loop that tests each string element.
+So:
+Index() is likely optimized at a low level in Python. I suggest you prefer index() for list searching.
+Python that times list searching
+
+import time
+
+values = ["Augustus", "Tiberius", "Caligula", "Claudius"]
+
+print(time.time())
+
+# Version 1: index.
+i = 0
+while i < 10000000:
+    v = values.index("Caligula")
+    i += 1
+
+print(time.time())
+
+# Version 2: for-range.
+i = 0
+while i < 10000000:
+    v = 0
+    for n in range(0, len(values)):
+        if values[n] == "Caligula":
+            v = n
+            break
+    i += 1
+
+print(time.time())
+
+Output
+
+1362429980.178
+1362429984.018  index() =  3.84 s
+1362429994.569  for     = 10.55 s
+
+Array. In Python a list is separate from an array. Lists are good for small data sets, but for larger amounts of data, arrays are far more efficient. They often use 90% less memory.
+Array
+
+A summary. A list stores elements one after another, in a linear collection. In Python it handles any type of element, including numbers, strings—even tuples and other collections.

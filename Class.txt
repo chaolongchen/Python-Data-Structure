@@ -1,0 +1,350 @@
+Class. In the distance a castle stands. It has many functions—it has a moat, it has walls, it guards the city. It keeps out invaders.
+Like a castle, a class in Python has functions (defs). A castle guards the town. A class guards its data. Classes are an abstraction.
+Init example. This program creates a class. It uses the class keyword and provides two methods. The __init__ method is special. It is a constructor.
+Note:
+Init receives parameters and assigns fields to the new class instance. It can validate arguments, do computations, call methods.
+Box:
+In the expression Box(10, 2), we create a new instance of the Box class. Its width is set to 10. And its height is set to 2.
+Area:
+The area() method will return 20. This is based on the values stored in memory, set by init.
+Based on: Python 3
+
+Python program that uses class
+
+class Box:
+    def area(self):
+        return self.width * self.height
+
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+# Create an instance of Box.
+x = Box(10, 2)
+
+# Print area.
+print(x.area())
+
+Output
+
+20
+
+
+Inheritance. A class can inherit from one or more other classes. The class we want to derive from must be defined. The derived class is specified in the parentheses after the class name.
+Here:
+Class B derives from class A. In the statements after the classes, we call size (from class B) and width (from class A).
+Size:
+This def method is found directly on class B. It does not exist on class A.
+Width:
+This is found by checking the base class of class B, which is class A. Width is a method on class A.
+Python program that uses class inheritance
+
+class A:
+    def width(self):
+        print("a, width called")
+
+class B(A):
+    def size(self):
+        print("b, size called")
+
+# Create new class instance.
+b = B()
+# Call method on B.
+b.size()
+# Call method from base class.
+b.width()
+
+Output
+
+b, size called
+a, width called
+
+One limitation. You cannot have circular class inheritance. If you try to have class A derive from B, and B derive from A, you will get a NameError.
+Two underscores. In a class, some members have two underscores at the start of their names. These are special. The Python language treats them as private.
+And:
+Private members can be accessed outside the class, but we must add _ClassName to the start.
+Here:
+In class A, we have a field called __value. We must reference this as _A__value outside of the class, but can use __value inside.
+Python program that uses two-underscore variable
+
+class A:
+    # Init.
+    def __init__(self, value):
+        self.__value = value
+
+    # Two-underscore name.
+    __value = 0
+
+# Create the class.
+a = A(5)
+
+# [1] Cannot use two-underscore name.
+# print(a.__value)
+
+# [2] Must use mangled name.
+print(a._A__value)
+
+Output
+
+5
+
+Issubclass. This determines if one class is derived from another. With this built-in method, we pass two class names (not instances).
+Return:
+If the first class inherits from the second, issubclass returns true. Otherwise it returns false.
+Tip:
+This is rarely useful to know: a class is considered a subclass of itself. The third issubclass call below shows this.
+Python program that uses issubclass
+
+class A:
+    def hello(self):
+        print("A says hello")
+
+class B(A):
+    def hello(self):
+        print("B says hello")
+
+# Use the derived class.
+b = B()
+b.hello()
+
+# See if B inherits from A.
+if issubclass(B, A):
+    print(1)
+
+# See if A inherits from B.
+if issubclass(A, B):
+    # Not reached.
+    print(2)
+
+# See if A inherits from itself.
+if issubclass(A, A):
+    print(3)
+
+Output
+
+B says hello
+1
+3
+
+Isinstance. When the first argument (a variable) is an instance of the second argument (a class), isinstance returns true. It will also return true if the class is a base class.
+Here:
+For some variables, like lists, the class name may not be specified in the program. But we can still test for "list" this way.
+Python program that uses isinstance
+
+class A:
+    def welcome(self):
+        # Not called.
+        print("Welcome")
+
+# This is an instance of A.
+a = A()
+
+if isinstance(a, A):
+    print(1)
+
+# This is an instance of the list class.
+b = [1, 2, 3]
+
+if isinstance(b, A):
+    # Not reached.
+    print(2)
+
+if isinstance(b, list):
+    print(3)
+
+Output
+
+1
+3
+
+Repr. This accesses the __repr__ method from a class. Repr stands for "representation." It converts an object into a string representation. Here we display Snake instances in a special way.
+Tip:
+We return a string from the repr method. The print method automatically calls an object's __repr__ method.
+And:
+We can call repr to force the __repr__ method to be used. This lets us store the representation string in a variable.
+Python program that uses repr
+
+class Snake:
+    def __init__(self, type):
+        self.type = type
+
+    def __repr__(self):
+        return "Snake, type = " + self.type
+
+# Create Snake instance.
+# ... Print its repr.
+s = Snake("Anaconda")
+print(s)
+
+# Get repr of Snake.
+value = repr(s)
+print(value)
+
+Output
+
+Snake, type = Anaconda
+Snake, type = Anaconda
+
+Classmethod. This is a function decorator. We apply it by specifying @classmethod before "def." It is a combination of an instance, and static, method. It can be called either way.
+So:
+We can call the classmethod example, with the syntax Box.example or on a Box instance "b."
+Class:
+The class argument ("cls" here) can be used as to create a type and return it. Or we can ignore it.
+Python that uses classmethod
+
+class Box:
+    @classmethod
+    def example(cls, code):
+        # This method can be used as an instance or static method.
+        print("Method called:", code)
+
+# Use classmethod as a static method.
+Box.example("cat")
+
+# Use classmethod as an instance method.
+b = Box()
+b.example("dog")
+
+Output
+
+Method called: cat
+Method called: dog
+
+Staticmethod. A static method accepts no self instance. Most methods in a class accept a first argument with name "self." With the @staticmethod decorator, though, we omit this argument.
+Tip:
+Static methods can return any value. They can accept any arguments. They are called with the class name, or on an instance.
+Also:
+It makes no difference whether you call a static method with Box.Message or on an instance like b.Message.
+Python that uses staticmethod
+
+class Box:
+    @staticmethod
+    def Message(a):
+        print("Box Message", a)
+
+# Call static method with type.
+Box.Message(1)
+
+# Call static method with instance.
+b = Box()
+b.Message(2)
+
+Output
+
+Box Message 1
+Box Message 2
+
+Property. A property gets and sets a value. It is just like a method, but uses simpler syntax. A property can be assigned like a variable. This causes the setter method to be executed.
+Here:
+We pass two arguments to the property built-in. We specify getname as the getter, and setname as the setter.
+Tip:
+Any code statements can be used in getters and setters. Here we capitalize the string passed to setname.
+Snake:
+We create a Snake class instance. Then we assign the "name" property. This invokes the setname method of the Snake class.
+Finally:
+We print the value of the name property. This invokes the getname method.
+Python that uses property
+
+class Snake:
+    def getname(self):
+        return self._name
+
+    def setname(self, value):
+        # When property is set, capitalize it.
+        self._name = value.capitalize()
+
+    name = property(getname, setname)
+
+# Create a snake instance.
+s = Snake()
+
+# Set name property.
+s.name = "rattle"
+
+# Get name property.
+print(s.name)
+
+Output
+
+Rattle
+
+Super. With the super() built-in, we can get the parent of a class. This gets the immediate ancestor. Here we call super() within the Circle class, which references its parent class, Shape.
+Print:
+The name method from Circle prints "Circle." Then name() from Shape is also called.
+Python that uses super
+
+class Shape:
+    def name(self):
+        print("Shape")
+
+class Circle(Shape):
+    def name(self):
+        print("Circle")
+        # Call name method from parent class.
+        super().name()
+
+# Create Circle and call name.
+c = Circle()
+c.name()
+
+Output
+
+Circle
+Shape
+
+Hash. When comparing objects, a hash code can be used for more speed. A dictionary uses hashes. With __hash__ we implement custom hash computations. A unique value is a good hash.
+Here:
+In this program two Snake objects, with the same names and colors, are created. The unique_id is used to compute the hash.
+Python that uses hash on class
+
+class Snake:
+    def __init__(self, name, color, unique_id):
+        self.name = name
+        self.color = color
+        self.unique_id = unique_id
+    def __hash__(self):
+        # Hash on a unique value of the class.
+        return int(self.unique_id)
+
+# Hash now is equal to the unique ID values used.
+p = Snake("Python", "green", 55)
+print(hash(p))
+
+p = Snake("Python", "green", 105)
+print(hash(p))
+
+Output
+
+55
+105
+
+Id method. Every object has an id. This is unique to the instance. Its exact number is an implementation detail and will vary between program executions. Here we look at class ids.
+Note:
+Ids may be reused when objects are removed by the garbage collector and are not in use. They are rarely useful in code.
+Python that uses id
+
+class Cat:
+    def __init__(self, color):
+        self.color = color
+
+cat1 = Cat("black")
+cat2 = Cat("orange")
+
+# Each object has a unique id.
+# ... The ids may vary between runs.
+print(id(cat1))
+print(id(cat2))
+
+Output
+
+4353403328
+4353403384
+
+Type. Built-in methods can create and modify types with statements. The type built-in can replace the "class" declaration. With setattr and getattr we add or load fields.
+Type
+
+Types, instances. With a class definition, we outline a type. These classes are templates. They must be created as instances (through __init__) to be used. Types are not instances.
+Models:
+In programming, we specify models as templates. And in executable statements, we bring those templates into life (as instances).
+
+In a class, we store data, as in fields. And we also provide method implementations, as with the ref-keyword. This provides an important level of abstraction.

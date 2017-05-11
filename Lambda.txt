@@ -1,0 +1,165 @@
+Lambda. Think of a tree. Each branch and leaf grows in a pattern. Suppose a tiny function (and many similar functions) constructed this tree.
+In Python we have higher-order procedures and the lambda keyword. We pass lambdas to other functions. Much like a tree grows we build a program in little parts.
+In this program, two lambdas are created. The first is called "square" and it receives one argument "n" and returns "n * n". The second is called "cube".
+Square:
+This method receives one value. It returns the value multiplied by itself.
+Cube:
+This method too receives one value. It returns the value cubed (with an exponent of 3).
+Syntax:
+Lambda expression syntax uses the lambda keyword. The arguments are specified after.
+Based on: Python 3
+
+Python program that uses lambda argument
+
+def apply(f, n):
+    print(f(n))
+
+# Create two lambdas.
+square = lambda n: n * n
+cube = lambda n: n * n * n
+
+# Pass lambdas to apply method.
+apply(square, 4)
+apply(cube, 3)
+
+Output
+
+16
+27
+
+
+Lambda usage. Here we define a lambda that receives no arguments. It simply returns an expression. Here it returns the sum of the numbers 1, 2 and 3 (which is 6).
+Variable:
+We can assign a variable to a lambda expression and then invoke the lambda with parentheses. We call it like any other function.
+Here:
+To get the value 6 in this program, we invoke x. We then print the value it returns (stored in y).
+So:
+Lambdas can be passed to other methods. They can be stored in variables. And those variables can be called like methods.
+Python program that uses lambda, no arguments
+
+# Assign variable to lambda expression.
+x = lambda: sum(range(1, 4))
+
+# Invoke lambda expression.
+y = x()
+print(y)
+
+Output
+
+6
+
+None. Many statements, like print(), return None. This is a valid return value for a lambda. We can specify a lambda with side effects, and a None return value.
+None
+Print
+Python program that uses None, lambda
+
+# This lambda has a side effect.
+# ... Print returns None.
+p = lambda x: print(x)
+
+p("Hello")
+p("World")
+
+Output
+
+Hello
+World
+
+Nested. A lambda can call another. This can simplify complex computations—we assign names to parts of a computation. The order the lambdas appear in the file does not matter.
+With nested lambdas:
+Recursion can occur. This may result in a RuntimeError: maximum recursion depth exceeded error.
+Python program that uses lambda in lambda
+
+add_two = lambda n: n + 2
+multiply_add_two = lambda n: add_two(n * 2) # Call lambda in lambda.
+
+print(multiply_add_two(3))
+print(multiply_add_two(5))
+
+Output
+
+8
+12
+
+Limitations. The lambda syntax in Python has serious limitations. But these limitations make sense. You cannot have multiple statements in a lambda expression.
+Tip:
+If you want many statements, please instead use a def. For complex or involved methods, def is a better option.
+Def
+
+Concepts. A lambda is an expression of behavior. It is a small function meant to do a well-defined task. We have no need to write an entire program in lambda syntax.
+And:
+Lambda supplements, but does not replace, the def method syntax. It should be used when it improves clarity.
+Greek letter:
+The word "lambda" is simply the name of a letter in the Greek alphabet. It is similar to the letter "L."
+
+Performance research. In some languages lambdas cause performance loss. In the Python documentation I found that lambdas should not cause this problem. They behave just like def methods.
+The expression lambda yields a function object. The unnamed object behaves like a function object defined with [def].
+Expressions: python.org
+
+Performance. Here we test lambda performance. The square() method above is rewritten in the def method syntax. We then benchmark the methods against each other.
+First:
+The program tests the performance of the def method call. We call it ten million times.
+Second:
+The program times the lambda expression method call. We also call it ten million times.
+Note:
+The results show that methods written with the def keyword and with the lambda keyword are close in performance.
+Python program that times lambda expressions
+
+import time
+
+# Method.
+def square1(n):
+    return n ** 2
+
+# Lambda method.
+square2 = lambda n: n ** 2
+
+print(time.time())
+
+# Use def method.
+i = 0
+while i < 10000000:
+    square1(1)
+    i += 1
+
+print(time.time())
+
+# Use lambda method.
+i = 0
+while i < 10000000:
+    square2(1)
+    i += 1
+
+print(time.time())
+
+Results
+
+1346613154.399
+1346613158.919 (Def =    4.52 s)
+1346613163.397 (Lambda = 4.48 s)
+
+Macros. In older languages like C a macro is an easy way to combine code statements. It reduces repetitive typing. A lambda can be used in this way.
+Here:
+We use a lambda X to combine two string method calls. This is like a macro for those invocations. Typing is reduced.
+Python program that uses lambda as macro
+
+line1 = "A cat, a dog  "
+line2 = "  a bird, a mountain"
+
+# Use X as an alias for two methods.
+x = lambda s: s.strip().upper()
+
+# Call the lambda to shorten the program's source.
+line1b = x(line1)
+line2b = x(line2)
+
+print(line1b)
+print(line2b)
+
+Output
+
+A CAT, A DOG
+A BIRD, A MOUNTAIN
+
+A summary. Function objects provide many possibilities. We specify these objects with the lambda syntax form. And when we pass them to other functions, we develop higher-order procedures.
+In functional programming, we construct functions that act on other functions. We emphasize less the order of statements and loops. We focus on the input, and output, of functions.

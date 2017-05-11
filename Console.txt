@@ -1,0 +1,242 @@
+Console. A message appears on the rock wall. It is written in light. Here we receive meaning through written text—like in a console program.
+In Python 3 we use input and output methods. With print(), which requires method syntax, we generate output. This is a simple, easy-to-maintain approach.
+Print. This program uses three calls to print(). It uses one and then two arguments. When two arguments are used to print, a space is rendered in between the strings.
+And:
+Print can handle variables. We show a string variable, but other values (like integers) and even objects can be printed.
+Based on: Python 3
+
+Python program that uses print statement
+
+# Print a string literal.
+print("Hello")
+
+# Print two arguments.
+print("Hello", "there")
+
+# Print the value of a string variable.
+a = "Python"
+print(a)
+
+Output
+
+Hello
+Hello there
+Python
+
+
+Input. Here we read characters and strings (lines) from the console. When this program executes, it will pause and wait for a line input.
+Then:
+The user types some characters, such as "x" and presses enter. The input() method immediately returns this value.
+Loop:
+Often a loop is needed when designing console programs. This makes the program interactive.
+Python program that uses input
+
+# Get input from console.
+s = input()
+print("You typed", s)
+
+# Use if-statement on input.
+if s == "a":
+    print("Letter a detected")
+else:
+    print("Not letter a")
+
+Output
+
+a
+You typed a
+Letter a detected
+
+Interactive. A console program can continually prompt the user until a quit command is received. This allows the same program to run many commands without restarting.
+Here:
+We use a while-true loop and break if the user types a lowercase "q". The loop continues infinitely until a "q" is received.
+While True, Break
+Python program that interacts with user
+
+# Continue while true.
+while True:
+    # Get input.
+    value = input()
+
+    # Break if user types q.
+    if value == "q":
+        break
+
+    # Display value.
+    print("You typed: ", value)
+
+# Exit message.
+print("You quit.")
+
+Output
+
+1
+You typed:  1
+2
+You typed:  2
+3
+You typed:  3
+q
+You quit.
+
+Convert. The result of the input method is a string. It can be converted to any other type. Here I convert the result to an integer with the int() built-in operator.
+Tip:
+When creating a program, it is best to use the data type that most closely matches your data.
+Python program that converts console input
+
+print("Enter number:")
+# Get input and convert it to an integer.
+value = input()
+number1 = int(value)
+
+print("Again:")
+value = input()
+number2 = int(value)
+
+print("Product:")
+# Multiply the two numbers.
+print(number1 * number2)
+
+Output
+
+Enter number:
+10
+Again:
+2
+Product:
+20
+
+Validate. User input is often imperfect. It has errors. We can use the try and except statements to validate this input. The int() method raises an error if the input is invalid.
+So:
+In this example we continually prompt the user (by passing a string argument to the input method).
+And:
+We convert the string received into an integer. If the value is not numeric, int() will raise an error. The loop will continue.
+Try, Raise
+Python program that validates input
+
+while True:
+    try:
+        # Get input with prompt.
+        code = input("Code: ")
+        # Attempt to parse input.
+        value = int(code)
+        break;
+    except:
+        print("Invalid code")
+
+print("Value:", value)
+
+Output
+
+Code: g
+Invalid code
+Code: 89
+Value: 89
+
+Help. We can use Python in interactive mode. This helps us learn about Python constructs. In interactive mode, we can call the "help" built-in with an argument.
+Argument:
+This can be any term that Python can evaluate. Here I try the keyword "dict" which constructs a dictionary.
+Example help command use: Python
+
+>>>> help(dict)
+
+Help on class dict in module builtins:
+
+class dict(object)
+ |  dict() -> new empty dictionary.
+ |  dict(mapping) -> new dictionary initialized from a mapping object's
+ |      (key, value) pairs.
+
+Repr. The __repr__ method on a class determines how it is printed. On your custom objects, you can provide an implementation for repr. Formatting can be done in one location only.
+Class: Repr
+
+Print, file. By default, print() writes to the console. But we can change it to write to a file on the disk. We use the optional file argument.
+Open:
+We can specify a file object. Often programs receive this object from the open() method.
+File
+Note:
+When using this syntax, each call to print must specify the file argument. Otherwise, the default output (the console) is used.
+Note 2:
+In most programs, using the file object directly leads to clearer code.
+Python program that uses print, file argument
+
+# Open this file for writing.
+f = open("C:\\profiles\\perls.txt", "w")
+
+# Print lines to the file.
+print("Some text", file=f)
+print("Some more text", file=f)
+
+File contents: perls.txt
+
+Some text
+Some more text
+
+Print, end. Print has an optional "end" argument. This is set to a newline sequence by default, but you can override it. We often set end as a named argument.
+Here:
+In this example, we set end to an empty string literal. So print renders no end.
+Tip:
+By setting end to an empty string, we can use print multiple times on a single line.
+Tip 2:
+We can avoid concatenating strings before displaying them in this way. Please also consider calling print() with multiple arguments.
+Python that uses print, end
+
+# Change end argument to avoid newline.
+print("Hi, ", end="")
+print("how are you?")
+
+Output
+
+Hi, how are you?
+
+Print, no arguments. The print method can be used with no arguments. In this case, it will simply output the "end" value. By default, the end is a newline.
+Here:
+The output contains a blank line (with zero length) between the two numbers 100 and 200.
+Python that uses print, no arguments
+
+print(100)
+
+# Use an empty print statement.
+print()
+print(200)
+
+Output
+
+100
+
+200
+
+Expressions. All expressions are evaluated before being passed to the print() method. Here, 1 + 2 is transformed to 3 before being passed to print.
+Info:
+To override this behavior, you need to construct a string out of your numbers before passing anything to print.
+Convert Int, String
+Python that uses expressions
+
+# This prints 3.
+print(1 + 2)
+
+# This prints the expression.
+print("1 + 2")
+
+Output
+
+3
+1 + 2
+
+Format. Print does not support format strings. Instead we must pass the result of the str.format method to the print method. This syntax is not short, but it does make sense.
+Python that uses format, print
+
+# Print formatted string.
+value = 10
+print(str.format("There are {} apples", value))
+
+Output
+
+There are 10 apples
+
+Print, parentheses. In Python 3, the print method requires parentheses. This is often the first thing a Python 2 developer will discover about Python 3.
+So:
+In Python 3 programs, use those parentheses. I leave it to smarter people than me to design these languages.
+
+A summary. Console programs are often hard, even confusing, to use. What should you type? Users are not prepared to work with console programs.
+For developers. These programs are best left to developers, as part of the development tool chain. Python, which often shares this role in development, is a good fit.

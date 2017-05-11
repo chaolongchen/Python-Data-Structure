@@ -1,0 +1,113 @@
+Generators. Loops are hard. Python provides ways to make them easier. With a generator, we specify what elements are looped over. Those elements too can be transformed. Generators are reusable. They make code simpler.
+Tip:
+There are two ways to specify a generator. With the yield-keyword, we encapsulate a looping mechanism into a method.
+Tip 2:
+With an expression, we use the for-keyword to specify simpler generators. These have less power.
+
+Yield. We introduce the yield keyword. The term yield has a meaning similar to "produce": it dispatches specified elements. Unlike return, control returns again to the method. Here, the odds() method yields odd elements in an iterable.
+Def
+Info:
+The yield statement can return an expression, not just a variable. Try changing "yield a" to "yield a + 1".
+Also:
+The yield pattern here is the more powerful form. It can filter and transform elements.
+
+Based on: Python 3
+
+Python program that uses yield
+
+def odds(arg):
+    # Yield odd elements in the iterable.
+    for a in arg:
+        if a % 2 != 0:
+            yield a
+
+# An input list.
+items = [100, 101, 102, 103, 104, 105]
+
+# Display all odd items.
+for item in odds(items):
+    print(item)
+
+# Print copied list.
+copy = list(odds(items))
+print(copy)
+
+Output
+
+101
+103
+105
+[101, 103, 105]
+
+Expression. Sometimes in Python programs we see loop-like statements. These are not exactly loops. They are generator expressions. They return an iterator. Here we multiply each element in the list by 2 with a generator expression.
+List
+
+The expression "A" for "B" in "C" uses the generator expression syntax form. The first part, "A," is the result expression. We can use any expression we want. The second, "B," is the element we are acting upon within the collection "C."
+Tip:
+Generator expressions can be nested. This becomes hard to read. I discourage writing excessively complex code.
+Python program that uses generator expression
+
+# Example integers.
+items = [100, 10, 1]
+
+# Use generator expression.
+multiplied = list(x * 2 for x in items)
+print(multiplied)
+
+Output
+
+[200, 20, 2]
+
+Performance. List comprehensions are similar to generators, but use square brackets and only work with lists. Are generators faster? In the Python documentation, we learn that list comprehensions tend to use more memory. I designed a benchmark.
+And:
+I found that a list comprehension was faster in both implementations I tried, Python and PyPy.
+PyPy
+So:
+Often a list comprehension is faster despite the increased memory usage that may occur (according to the Python documentation).
+Generator expressions... tend to be more memory friendly than equivalent list comprehensions.
+Classes, Generator Expressions: python.org
+Python program that benchmarks generator
+
+import time
+
+data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+print(time.time())
+
+# Version 1: generator.
+i = 0
+while i < 1000000:
+    double = list(x * 2 for x in data)
+    i += 1
+
+print(time.time())
+
+# Version 2: list comprehension.
+i = 0
+while i < 1000000:
+    double = [x * 2 for x in data]
+    i += 1
+
+print(time.time())
+
+Results
+
+1404138028.766
+1404138031.806  Generator:          3.04 s [Python 3.3]
+1404138033.569  List comprehension: 1.76 s
+
+1404137810.806
+1404137811.086  Generator:          0.28 s [PyPy 2.3.1]
+1404137811.287  List comprehension: 0.20 s
+
+Discussion. Generators are a syntax form. Their underlying concept is explored elsewhere in Python. In lists, we use list comprehensions (which require square brackets). And with map(), we also create iterators in a declarative way.
+Map
+
+These syntax forms are all declarative. In declarative programming, we specify our requirement with a declaration. Python then does the actual low-level work to fulfill our request.
+And:
+Imperative programming is where you specify individual statements on lines. It often involves traditional loops.
+While
+Note:
+Thanks to Kimi Arthur for reporting an invalid benchmark result on a previous version of this page.
+
+Generators simplify iteration. With them, we create looping abstractions. We then can reuse looping methods throughout programs. This leads to less code, better-tested code, and higher-quality programs.

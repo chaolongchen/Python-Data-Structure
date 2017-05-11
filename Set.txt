@@ -1,0 +1,271 @@
+Set. This is a collection of seashells. Each shell is different. The shells vary in size, color and pattern. This is a set of distinct shells.
+Consider in Python we want to collect unique strings or ints. A set is ideal. It is a dictionary but with no linked values. A frozenset is immutable and can be a dictionary key.
+frozenset
+
+First example. This program initializes a set. When we initialize a set, we do not include the values in the syntax as with a dictionary. We specify only the keys.
+Then:
+We use len(), in and not-in to test the set. It has just 3 elements, despite specifying 5 strings.
+Tip:
+When the set is initialized, duplicate values are removed. As with a dictionary, no 2 keys can have the same value.
+In:
+The set allows the in-keyword. This returns true or false depending on whether the item exists.
+In
+
+Based on: Python 3
+
+Python program that creates set
+
+# Create a set.
+items = {"arrow", "spear", "arrow", "arrow", "rock"}
+
+# Print set.
+print(items)
+print(len(items))
+
+# Use in-keyword.
+if "rock" in items:
+    print("Rock exists")
+
+# Use not-in keywords.
+if "clock" not in items:
+    print("Cloak not found")
+
+Output
+
+{'spear', 'arrow', 'rock'}
+3
+Rock exists
+Cloak not found
+
+Add. Elements can be added to a set with the add method. Here we create an empty set with the set built-in method. We then add 3 elements to the set.
+Tip:
+This is a good approach if you don't know beforehand what elements are to be added.
+Empty:
+We use set() to create an empty set. We cannot use empty curly brackets as they indicate an empty dictionary, not set.
+Python program that adds, discards, removes
+
+# An empty set.
+items = set()
+
+# Add three strings.
+items.add("cat")
+items.add("dog")
+items.add("gerbil")
+print(items)
+
+Output
+
+{'gerbil', 'dog', 'cat'}
+
+Create, list. We can create a set from a list (or other iterable collection). Consider this example. We pass a list with six different elements in it to set(). The duplicates are ignored.
+Integers:
+A set can contain integers, strings, or any type of elements that can be hashed.
+Python program that creates set from list
+
+# Create a set from this list.
+# ... Duplicates are ignored.
+numbers = set([10, 20, 20, 30, 40, 50])
+print(numbers)
+
+Output
+
+{40, 10, 20, 50, 30}
+
+Subset, superset. In set theory, we determine relations between sets of elements. And with the Python set type, we can compute these with built-in methods.
+Here:
+In this program, we introduce two sets. The method results depend on the numbers in the sets.
+Is subset:
+This returns true in the program because numbers2 is a subset of numbers1.
+Is superset:
+This method also returns true in this program. Numbers1 is a superset of numbers2.
+Intersection:
+This method returns a new set that contains just the shared numbers. Other values are omitted.
+Python program that uses set methods
+
+numbers1 = {1, 3, 5, 7}
+numbers2 = {1, 3}
+
+# Is subset.
+if numbers2.issubset(numbers1):
+    print("Is a subset")
+
+# Is superset.
+if numbers1.issuperset(numbers2):
+    print("Is a superset")
+
+# Intersection of the two sets.
+print(numbers1.intersection(numbers2))
+
+Output
+
+Is a subset
+Is a superset
+{1, 3}
+
+Union. Another set operation that is available is union(). This combines two sets. Any element in either set is retained in the return value of union. But duplicates are eliminated.
+Here:
+In the program, the sets each contained a 3, but the union method returns a set with just one 3.
+Python program that unions two sets
+
+# Two sets.
+set1 = {1, 2, 3}
+set2 = {6, 5, 4, 3}
+
+# Union the sets.
+set3 = set1.union(set2)
+print(set3)
+
+Output
+
+{1, 2, 3, 4, 5, 6}
+
+Subtract, difference. A set can be subtracted from another set. The difference() method is used in this case. The syntax that is clearer is the best choice.
+Tip:
+Subtracting sets is not something I do every day. For this reason, I would prefer difference() to make the operation explicit.
+Result:
+When we subtract set "b" from set "a", the string "connecticut" is removed. The other strings remain.
+And:
+When we subtract set "a" from set "b", the string "connecticut" is also removed. The other two strings from "b" remain.
+Python program that subtracts sets
+
+a = {"new york", "connecticut", "new jersey"}
+b = {"connecticut", "pennsylvania", "maine"}
+
+# Subtract.
+c = a - b
+print(c)
+
+# Difference.
+c = a.difference(b)
+print(c)
+
+# Subtract in opposite order.
+c = b - a
+print(c)
+
+# Difference in opposite order.
+c = b.difference(a)
+print(c)
+
+Output
+
+{'new jersey', 'new york'}
+{'new jersey', 'new york'}
+{'pennsylvania', 'maine'}
+{'pennsylvania', 'maine'}
+
+Discard. We pass discard() the value of an element we want to remove. If the element does not exist, discard will cause no error—it does nothing. Remove, however, will cause a KeyError.
+So:
+To safely use remove(), you may need to use the in-operator beforehand. Discard meanwhile does not need this step.
+Python that uses discard, remove
+
+animals = {"cat", "dog", "parrot", "walrus"}
+print(animals)
+
+# Discard nonexistent element, nothing happens.
+animals.discard("zebra")
+print(animals)
+
+# Discard element that exists.
+animals.discard("cat")
+print(animals)
+
+# Remove element that exists.
+animals.remove("parrot")
+print(animals)
+
+# Remove causes an error if the element is not found.
+animals.remove("buffalo")
+
+Output
+
+{'walrus', 'dog', 'parrot', 'cat'}
+{'walrus', 'dog', 'parrot', 'cat'}
+{'walrus', 'dog', 'parrot'}
+{'walrus', 'dog'}
+Traceback (most recent call last):
+  File "...", line 16, in <module>
+    animals.remove("buffalo")
+KeyError: 'buffalo'
+
+Get keys, dictionary. A dictionary contains only unique keys. With the set() built-in, we can get these keys and convert them into a set.
+Python that uses dictionary, set keys
+
+# This dictionary contains key-value pairs.
+dictionary = {"cat": 1, "dog": 2, "bird": 3}
+print(dictionary)
+
+# This set contains just the dictionary's keys.
+keys = set(dictionary)
+print(keys)
+
+Output
+
+{'bird': 3, 'dog': 2, 'cat': 1}
+{'cat', 'bird', 'dog'}
+
+Performance. How does a set compare in performance to a dictionary? Logically the performance should be similar. I test how an in-keyword test runs.
+Result:
+The set was consistently faster. The set lookup was performed about 4% faster than the dictionary lookup in the simple benchmark.
+Thus:
+When you need to test if an element exists in a collection, the set may offer improved performance over the dictionary.
+Python that benchmarks set
+
+import time
+
+set1 = {"a", "b", "c", "z"}
+dict1 = {"a": 1, "b": 2, "c": 3, "z": 4}
+
+print(time.time())
+
+# Use set.
+i = 0
+while i < 10000000:
+    a = "z" in set1
+    i += 1
+
+print(time.time())
+
+# Use dictionary.
+i = 0
+while i < 10000000:
+    a = "z" in dict1
+    i += 1
+
+print(time.time())
+
+Output
+
+1346615677.741
+1346615679.7   (Set        = 1.959 s)
+1346615681.732 (Dictionary = 2.032 s)
+
+1346615958.731
+1346615960.692 (Set        = 1.961 s)
+1346615962.736 (Dictionary = 2.044 s)
+
+In my experience, sets are not widely used in computer programs. Instead collections like dictionaries are used more often. But sometimes a set is useful.
+Overall:
+A dictionary is more powerful than a set. But in certain programs, a set is more graceful. It has methods such as intersection().
+
+Map. Methods such as map can be used to transform collections. The result of map() is not a set. It is a "map object" which we can enumerate in a for-loop.
+Map
+Python that uses set and map
+
+values = {10, 20, 30}
+
+# Multiply all values in the set by 100.
+result = map(lambda x: x * 100, values)
+
+# Display our results.
+for value in result:
+    print(value)
+
+Output
+
+1000
+2000
+3000
+
+Sometimes, the existence of keys is our main consideration. The keys have no specific value. Here a set is worthwhile. It avoids confusion with having unused values in a dictionary.
+More advantages. A set shortens the syntax of programs. No values are specified. It provides mathematical methods like union that act on set logic.

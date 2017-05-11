@@ -1,0 +1,129 @@
+Map. A cold wave comes over the land. All things freeze at once. A function (the freeze) affects all elements of the terrain (the lake, the trees).
+With map, we apply a method to a collections. Map requires fewer statements and variables. It is declarative. We tell the program the result we want, not how to compute it.
+An example. Here we apply map() to a small list. As the first argument to map, we pass a lambda expression. This lambda increments each element it receives.
+Then:
+The map method passes all elements of the list to the lambda. It does this one at a time.
+Result:
+We receive an iterable collection containing the elements of the list. All elements have had 1 added to their values.
+Tip:
+The lambda is not required. A def-function may be passed to the map built-in method.
+Based on: Python 3
+
+Python program that uses map
+
+# An input list.
+items = [1, 2, 3]
+
+# Apply lambda to all elements with map.
+for r in map(lambda x: x + 1, items):
+    print(r)
+
+Output
+
+2
+3
+4
+
+
+Iterator. Map returns an iterator. We often must convert this back into the desired collection type. Here, we use map on a list. We then convert the result of map back into a list.
+Caution:
+This code creates a copy of the original list. Both exist in memory. This may be inefficient if you want to modify a list.
+Python program that creates list with map
+
+# Original list.
+items = [7, 8, 9]
+
+# Map into a new list.
+items2 = list(map(lambda z: z * 2, items))
+
+# Display two lists.
+print(items)
+print(items2)
+
+Output
+
+[7, 8, 9]
+[14, 16, 18]
+
+Sum, predicate. How many times in a collection is a condition true? A predicate method is one that returns true or false based on its argument.
+Here:
+We use map with a predicate method. Then we use sum() to count true results of the predicate.
+Lambda:
+We use a lambda expression: this one receives a string parameter. It calls the startswith method.
+And:
+They are counted by sum. Three of the four strings start with the substring "San" in the list.
+Python program that sums result of map
+
+# Cities.
+names = ["San Jose", "San Francisco", "Santa Fe", "Houston"]
+
+# Sum result of map.
+count = sum(map(lambda s: s.startswith("San"), names))
+
+# Count of cities starting with San.
+print(count)
+
+Output
+
+3
+
+Two iterables. More than one iterable can be used as arguments to map. Here we use two lists in a map call. The two lists have an unequal number of elements.
+However:
+Map does not care. It proceeds as far as it can, which is three elements.
+Tip:
+The lambda here accepts two arguments. This is required when using two iterables.
+Info:
+The first argument is the first list's element. And the second argument is from the other list.
+Python program that uses two lists in map
+
+# Two input lists.
+a = [1, 2, 3]
+b = [2, 3, 4, 5]
+
+# Multiply elements of two lists together.
+result = list(map(lambda x, y: x * y, a, b))
+
+# Three elements are present.
+print(result)
+
+Output
+
+[2, 6, 12]
+
+Performance. In tests, map tends to be slower than an equivalent for-loop. There is some overhead to invoking a method and constructing a map result.
+In this test:
+I found that map was about twice as slow. The loops add 20 to each element in a list, and sum the total.
+Tip:
+Map() may be best reserved for situations where the clarity of code, and not its speed, is more important.
+Python program that times map, for-loop
+
+import time
+
+numbers = [5, 10, 15, 20, 30, 40]
+
+print(time.time())
+
+# Version 1: map.
+for c in range(0, 1000000):
+    sum = 0
+    for i in map(lambda v: v + 20, numbers):
+        sum += i
+
+print(time.time())
+
+# Version 2: for-loop.
+for c in range(0, 1000000):
+    sum = 0
+    for v in numbers:
+        sum += (v + 20)
+
+print(time.time())
+
+Results
+
+1411254268.364547
+1411254271.106704    map:      2.742 s
+1411254272.373777    for-loop: 1.267 s
+
+Solutions that use map can become complex. Sometimes, using statements in a loop is simpler. In programming, "advanced" code is often inferior to understandable code.
+Simpler things, like for-loops, are often easier to keep correct. Map meanwhile has benefits in programs. Entire programs can be designed around it.

@@ -1,0 +1,408 @@
+Tuple. Consider this starfish. It has 5 arms. It is underwater. These attributes form a unit of information—they could be stored together in a tuple.
+Python tuples are values—they never change. Suppose an element has a shape and a color. This forms a tuple pair. Logically this information is a single unit.
+Create. We first revisit the concept of immutability. A tuple cannot be changed after created. So the creation syntax is important. We use parentheses "(" and ")" to create tuples.
+Zero elements:
+To create a tuple with zero elements, use only the two parentheses "()".
+One element:
+For a tuple with one element, use a trailing comma. This helps Python tell that you don't mean an expression, such as (1 + 2).
+Two elements:
+For a tuple with two or more elements, use a comma between elements. No ending comma is needed.
+
+Based on: Python 3
+
+Python program that creates tuples
+
+# Zero-element tuple.
+a = ()
+# One-element tuple.
+b = ("one",)
+# Two-element tuple.
+c = ("one", "two")
+
+print(a)
+print(len(a))
+
+print(b)
+print(len(b))
+
+print(c)
+print(len(c))
+
+Output
+
+()
+0
+('one',)
+1
+('one', 'two')
+2
+
+Immutable. An immutable object cannot be changed. Once created it always has the same values. A tuple is immutable. Here we attempt to assign the first element in the tuple.
+But:
+This is invalid. When executed, the Python runtime will report a TypeError.
+Error
+Create:
+To make a new, changed tuple, we would need to create a new tuple. We could specify that some items have the same values.
+Python program that assigns tuple
+
+tuple = ('cat', 'dog', 'mouse')
+
+# This causes an error.
+tuple[0] = 'feline'
+
+Results
+
+TypeError: 'tuple' object does not support item assignment
+
+Immutability. This part is kind of boring. But the concept of immutable objects is important. It seems inefficient. Why not just modify existing objects?
+Dictionary:
+Some objects are more efficient when they are immutable. For example, in a dictionary tuples are used.
+And:
+We can directly access these two-element tuples. If these tuples could be changed, the original dictionary would become invalid.
+
+Pack, unpack. Tuples can be packed and unpacked. In packing, we place values into a new tuple. And in unpacking we extract those values back into variables.
+Note:
+This syntax form creates elegant and small programs. In this program we pack two strings into a tuple.
+Then:
+We initialize two variables to those two packed values. The variables act like any other variable.
+Python program that assigns variables
+
+# Create packed tuple.
+pair = ("dog", "cat")
+
+# Unpack tuple.
+(key, value) = pair
+
+# Display unpacked variables.
+print(key)
+print(value)
+
+Output
+
+dog
+cat
+
+No parentheses. Tuples are typically specified with surrounding parentheses chars. But suppose you are a wild one. You can just use a comma. The tuple is inferred.
+Python program that uses tuples, no parentheses
+
+# A trailing comma indicates a tuple.
+one_item = "cat",
+
+# A tuple can be specified with no parentheses.
+two_items = "cat", "dog"
+
+print(one_item)
+print(two_items)
+
+Output
+
+('cat',)
+('cat', 'dog')
+
+Add, multiply. A tuple is not a number. But it can be added to or multiplied. By adding two tuples, they are concatenated. One is put after the other.
+And:
+By multiplying a tuple with a number, we add the tuple to itself a certain number of times.
+Warning:
+This syntax form can become somewhat confusing. I have not used it often on tuples.
+Python program that adds and multiples tuples
+
+checks = (10, 20, 30)
+
+# Add two tuples.
+more = checks + checks
+print(more)
+
+# Multiply tuple.
+total = checks * 3
+print(total)
+
+Output
+
+(10, 20, 30, 10, 20, 30)
+(10, 20, 30, 10, 20, 30, 10, 20, 30)
+
+Divide, subtract. We cannot divide or subtract tuples. Out of curiosity I tried this. I received the TypeError with "unsupported operand type."
+Operand:
+As a reminder, an operand is a value on one side of an expression. It is part of an operation.
+
+Max, min. The max and min functions can be used on tuples. These functions locate the item that would be sorted last (max) or sorted first (min).
+Max, min
+For strings:
+The comparison performed is alphabetical—"able" comes before "zero". So "able" would be less than "zero".
+For numbers:
+The comparison is numeric—10 comes before 20. These comparisons are logical.
+Python program that uses max and min
+
+# Max and min for strings.
+friends = ("sandy", "michael", "aaron", "stacy")
+
+print(max(friends))
+print(min(friends))
+
+# Max and min for numbers.
+earnings = (1000, 2000, 500, 4000)
+
+print(max(earnings))
+print(min(earnings))
+
+Output
+
+stacy
+aaron
+4000
+500
+
+In keyword. This example creates a two-element tuple (a pair). It searches the tuple for the string "cat". It then searches for "bird", but this string does not exist.
+Note:
+With the in-keyword, we can search a tuple. We use in as part of an if-statement. And we can combine in with not—this is "not in".
+In
+Python that searches tuples
+
+pair = ("dog", "cat")
+
+# Search for a value.
+if "cat" in pair:
+    print("Cat found")
+
+# Search for a value not present.
+if "bird" not in pair:
+    print("Bird not found")
+
+Output
+
+Cat found
+Bird not found
+
+Slice. A tuple can be sliced. The slice notation uses a colon. On the left side of the colon, we have the starting index. If no starting index is present, the program uses 0.
+Slice
+And:
+On the right side of the colon, we have the ending index. If no ending index is present, the last index possible is used.
+Note:
+Slicing creates a new tuple. A slice that specifies no indexes is a simple way to copy a tuple.
+Python that uses tuple slices
+
+values = (1, 3, 5, 7, 9, 11, 13)
+
+# Copy the tuple.
+print(values[:])
+
+# Copy all values at index 1 or more.
+print(values[1:])
+
+# Copy one value, starting at first.
+print(values[:1])
+
+# Copy values from index 2 to 4.
+print(values[2:4])
+
+Output
+
+(1, 3, 5, 7, 9, 11, 13)
+(3, 5, 7, 9, 11, 13)
+(1,)
+(5, 7)
+
+Index. This gets the index of an element. Here we search for the value "dog," and get the index 1 (the second position). If we use index() on a value that is not found, an error results.
+Tip:
+Consider the in operator before calling index() on a value that might not exist. This prevents a possible exception.
+Python that uses index
+
+# Three-item tuple.
+items = ("cat", "dog", "bird")
+
+# Get index of element with value "dog".
+index = items.index("dog")
+print(index, items[index])
+
+Output
+
+1 dog
+
+Count. This returns the number of elements with a specific value in a tuple. If you need to get the total length of the tuple, please use len. Count only counts certain values.
+Python that uses count
+
+values = (1, 2, 2, 3, 3, 3)
+print(values.count(1))
+print(values.count(3))
+# There are no 100 values, so this returns 0.
+print(values.count(100))
+
+Output
+
+1
+3
+0
+
+Keys, dictionary. We next use a tuple as a dictionary key. Dictionaries can use tuple keys without worrying about them changing. Here we use the pair of values 1 and 2 to look up a value.
+Tip:
+You can use tuples in this way to create a two-dimensional dictionary. Use a tuple to represent X and Y coordinates.
+Python that uses tuples as dictionary keys
+
+# A tuple with two numbers.
+pair = (1, 2)
+
+# Create a dictionary.
+# ... Use the tuple as a key.
+dict = {}
+dict[pair] = "Python"
+
+# Access the dictionary using a tuple.
+print(dict[(1, 2)])
+
+Output
+
+Python
+
+Convert. A tuple cannot be modified. But a list can be changed in many ways. For this reason we often need to convert a tuple into a list.
+List:
+The list built-in accepts a tuple as its argument. Here we use sort() on the resulting list.
+Finally:
+In the program, we convert the list back into a tuple. This is done with the tuple() function.
+Here:
+We see that a list has square brackets. A tuple has round ones. This is an important part of Python's syntax.
+Python that converts tuple and list
+
+# Tuple containing unsorted odd numbers.
+odds = (9, 5, 11)
+
+# Convert to list and sort.
+list = list(odds)
+list.sort()
+print(list)
+
+# Convert back to tuple.
+sorted_odds = tuple(list)
+print(sorted_odds)
+
+Output
+
+[5, 9, 11]
+(5, 9, 11)
+
+Enumerate. This is a built-in method. Enumerate() returns a tuple of an index and the element value at that index. It is often used on a list.
+Here:
+We use enumerate on a list of strings. We can access the tuple, or directly unpack the tuple in the for-statement.
+Python that uses enumerate
+
+values = ["meow", "bark", "chirp"]
+
+# Use enumerate on list.
+for pair in enumerate(values):
+    # The pair is a 2-tuple.
+    print(pair)
+
+# Unpack enumerate's results in for-loop.
+for index, value in enumerate(values):
+    # We have already unpacked the tuple.
+    print(str(index) + "..." + value)
+
+Output
+
+(0, 'meow')
+(1, 'bark')
+(2, 'chirp')
+0...meow
+1...bark
+2...chirp
+
+List of tuples. Let us examine a practical example. This program divides a string into a list of tuples. Each tuple has adjacent characters from the string.
+Range:
+We use the range built-in to iterate over the string, with a step of 2. We start at index 1 to avoid the first char.
+Append:
+We call append() on the list (called "pairs") and as the argument to append, we create a two-element tuple (a pair).
+Python that uses list of tuples
+
+value = "abcdefgh"
+pairs = []
+
+# Loop over string.
+# ... Use step of 2 in range built-in.
+# ... Extract pairs of letters into a list of tuples.
+for i in range(1, len(value), 2):
+    one = value[i - 1]
+    two = value[i]
+    pairs.append((one, two))
+
+# Display list of tuple pairs.
+for pair in pairs:
+    print(pair)
+
+Output
+
+('a', 'b')
+('c', 'd')
+('e', 'f')
+('g', 'h')
+
+Swap. To flip or swap variables, we do not need a temporary variable. We can use a tuple unpacking expression. We assign each variable to the other one in a single statement.
+Python that flips variables
+
+left = "cat"
+right = "dog"
+print("LEFT", left)
+print("RIGHT", right)
+
+print(":::FLIP:::")
+# Use tuple unpacking to flip variables.
+left, right = right, left
+
+print("LEFT", left)
+print("RIGHT", right)
+
+Output
+
+LEFT cat
+RIGHT dog
+:::FLIP:::
+LEFT dog
+RIGHT cat
+
+Performance. How do we choose between the syntax forms for tuples? In this benchmark we test two ways of assigning variables to values in a tuple. We unpack tuples.
+Version 1:
+This version of the program uses a single statement to unpack an existing tuple.
+Version 2:
+This version assigns to the elements in a tuple using the "[" and "]" syntax.
+Result:
+Version 1, which unpacks the tuple in a single statement, is somewhat faster.
+Note:
+In Python, the number of statements often influences greatly the results. This may change as more advanced compilers appear.
+Python that benchmarks tuple
+
+import time
+
+pair = (1, 2)
+
+print(time.time())
+
+# Version 1: unpack tuple.
+i = 0
+while i < 10000000:
+    (a, b) = pair
+    i = i + 1
+
+print(time.time())
+
+# Version 2: assign variables to tuple separately.
+i = 0
+while i < 10000000:
+    a = pair[0]
+    b = pair[1]
+    i = i + 1
+
+print(time.time())
+
+Results
+
+1345673733.21
+1345673737.12 (Unpack: 3.91 s)
+1345673742.12 (Assign: 5.00 s)
+
+Research. A tuple is a sequence, much like a list (and not like a class). In the Python documentation, we find that the enumerate() built-in returns tuples.
+Tuples are immutable sequences, typically used to store collections of heterogeneous data (such as the 2-tuples produced by the enumerate() built-in).
+Built-in Types: python.org
+
+Namedtuple. In normal tuples, fields have no names. With namedtuple, a type from the collections module, we can provide names to a tuple's fields.
+Namedtuple
+
+With tuples, we have access to many (but not all) of the methods of a list. Tuples are key to other important types, such as dictionary. And they are used, to some advantage, within lists.
+Usage. Tuples are often combined with other types. Often we store tuples within lists to create a list of pairs. In this way we avoid combining values together in strings.
